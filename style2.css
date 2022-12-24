@@ -1,0 +1,15 @@
+
+.about-section-content{
+    background-color: rgb(255, 255, 255);}
+
+. content-container About-section-content h2{
+    align-items: center;
+}
+
+.about-section-content p{
+    color:black;
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    text-align: justify;
+}

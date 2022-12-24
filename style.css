@@ -1,0 +1,102 @@
+*{
+        margin: 0;
+        padding:0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+}
+.container{
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(rgba(0,0,0,0.3),transparent),url(1.jpg);
+        background-size: cover;
+        background-position: center;
+        padding: 0 8%;
+        position: relative;
+}
+nav{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 5px 0;
+}
+
+nav ul li{
+        flex: 1;
+        text-align: right;
+        float: left;
+        list-style: none;
+        padding-right: 30px;
+}
+nav ul lu{
+        display: inline-block;
+        list-style: none;
+        margin:30px 60px;
+}
+nav ul li a{
+        color: #fff;
+        text-decoration: none;
+        position: relative;
+padding:0 20px;
+}
+nav ul li a::after{
+        content: ' ';
+        width:0;
+        height: 3px;
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        transition: width 0.3s;
+}
+nav ul li a:hover::after{
+        width: 50%;
+}
+
+.text-box{
+        color: #fff;
+        position: absolute;
+        bottom: 8%;
+}
+.text-box p{
+        font-size: 40px;
+        font-weight: 500;
+        color:rgb(255, 255, 255)
+}
+.text-box h1{
+        font-size: 90px;
+        line-height: 160 px;
+        margin-left: -10px;
+        color: rgb(228, 203, 203);
+        
+}
+@keyframes back{
+100%{
+      background-position: 2000px 0;
+}
+}
+.text-box h3{
+        font-size: 40px;
+        font-weight: 500;
+        color: rgb(228, 203, 203);
+}
+.text-box .row{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 30px;
+}
+.text-box a{
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        padding: 10px 20px;
+        margin-right: 20px;
+        border: 2px solid #fff;
+        align-items: center;
+}
+.text-box a span{
+        font-size: 30px;
+        line-height: 15px;
+        margin-left: 5px;
+}
