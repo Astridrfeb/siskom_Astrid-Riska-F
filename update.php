@@ -52,13 +52,6 @@
     }
 ?>
 
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,32 +75,34 @@
     <div class="update-data">
         <div class="text-data"></div>
         <h1>Update</h1>
-         <form method="POST" action="update.html" enctype="multipart/form-data">
-            <label>Nama tempat</label>
+         <form method="POST" action="update.php" enctype="multipart/form-data">
+            <label>Nama</label>
             <br>
-            <!-- menambahkan attribute value yang nilainya dari database. jadi nanti di input formnya langsung terisi nilai -->
-            <input type="text" name="Nama tempat" value=<?php echo $student['Nama tempat']; ?> >
+            <input type="text" name="Nama_Tempat" value=<?php echo $kumpulan_koreantrip ['Nama_Tempat']; ?> >
             <br>
-            <label>Rating<label>
+            <label>Rating</label>
             <br>
-            <input type="text" name="Rating" value=<?php echo $student['Rating']; ?> >
+            <input type="number" name="Rating" value=<?php echo $kumpulan_koreantrip ['Rating']; ?> >
             <br>
-            <label>Tahundibagun</label>
+            <label>Alamat<label>
             <br>
-            <input type="text" name="Tahundibagun" value=<?php echo $student['Tahun dibagun']; ?> >
+            <input type="text" name="Alamat" value=<?php echo $kumpulan_koreantrip ['Alamat']; ?>  >
             <br>
-            <label>Alamat</label>
+            <label>Tahun Dibangun<label>
             <br>
-            <input type="text" name="Alamat" value=<?php echo $student['Alamat']; ?> >
+            <input type="number" name="Tahun_Dibangun" value=<?php echo $kumpulan_koreantrip ['Tahun_Dibangun']; ?>  >
+            <br>
+            <label>Gambar</label>
+            <br>
+            <img src = <?php echo $kumpulan_koreantrip['Gambar'] ?> width= "200">
+            <input type="file" name="Gambar">
             <br>
             <label>Penjelasan</label>
             <br>
-            <input type="text" name="Penjelasan" value=<?php echo $student['Penjelasan']; ?> >
-            
+            <input type="text" name="Penjelasan" value=<?php echo $kumpulan_koreantrip ['Penjelasan']; ?> >
             <br>
-            <br>
-            <br>
-            <button type="submit" name="update" value=<?php echo $student["id"]; ?>>Submit</button>
+            <!-- button type submit ini berfungsi untuk submit form -->
+            <button type="submit" name="submit" value="submit">Submit</button>
         </form>
             </div>
 
