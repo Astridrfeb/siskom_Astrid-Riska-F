@@ -3,12 +3,29 @@
 
     if(isset($_GET['id'])){
         $id= $conn->real_escape_string($_GET['id']);
-        $sql = "SELECT Nama_Tempat, Rating, Tahun_Dibangun, Alamat, Penjelasan FROM koreantrip WHERE id=".$id;
+        $sql = "SELECT id, Nama_Tempat, Gambar, Rating, Tahun_Dibangun, Alamat, Penjelasan FROM koreantrip WHERE id=".$id;
         $result = $conn->query($sql);
         $kumpulan_koreantrip = $result->fetch_assoc();
         $result->free_result();
         $conn->close();
+
+        if(isset($_POST['delete'])){
+        // ambil value yang dibawa oleh button delete
+        $id_to_delete= $conn->real_escape_string($_POST['delete']);
+        // delete data dengan id tertentu
+        $sql = "DELETE FROM koreantrip WHERE id=".$id_to_delete;
+        $result = $conn->query($sql);
+
+        if($result){
+            // jika query sukses dijalankan maka kita akan diarahkan ke page index.php
+            header('Location: index.php');
+        } else {
+            echo "Error deleting record: " . $conn->error;
+        }
+    }
 }
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,21 +47,21 @@
         </ul>
     </nav>
     <div class="halaman ketiga">
-        <div class="content-ketiga">
-            <h4 class=<?php echo $koreantrip['Nama_Tempat']; ?>Namsan Tower</h4>
-            <h5 class="text-ketiga"><img src ="./img/namsan tower.jpeg" alt=""width= "200"></h5>
-            <h6 class=<?php echo $koreantrip['Rating']; ?> </h6>
-            <h6 class="text-ketiga">Tahun dibangun : 1980</h6>
-            <h6 class="text-ketiga">Alamat : Namsangongwon-gil, Yongsan igadong, Yongsangu, Seoul, South Korea</h6>
-            <h7 class="text-ketiga">Namsan Tower merupakan menara yang saat ini digunakan sebagai pemancar gelombang radio pertama di Korea Selatan. 
-                Namsan tower memiliki tinggi 777 kaki dan dari menara tersebut kita dapat melihat keindahan kota seoul 360 derajat. 
-                Berdasarkan Survey Namsan Tower dinobatkan sebagai objek wisata nomor satu di Seoul Korea Selatan.</h7>
-        </div>
+    <h4><?php echo $kumpulan_koreantrip['Nama_Tempat']; ?></h4>
+    <h5><img src =<?php echo $kumpulan_koreantrip['Gambar']; ?> width= "200"></h4>
+    <h5><?php echo $kumpulan_koreantrip['Rating']; ?></h4>
+    <h5><?php echo "Tahun_Dibangun :" . $kumpulan_koreantrip['Tahun_Dibangun']; ?></h5>
+    <h5><?php echo "Alamat :". $kumpulan_koreantrip['Alamat']; ?></h5>
+    <h5><?php echo "Penjelasan ;". $kumpulan_koreantrip['Penjelasan']; ?></h5>
     </div>
 
     <div class=" text-ketiga">
-        <a href="update.html" class=" button-utama">Edit</a>
-        <a href=" hapus.html" class=" button-utama">Hapus</a>
+    <form action="detail.php" method="POST">
+        <!-- button ini kita namakan delete dan mengandung nilai id yang akan dimasukkan ke dalam query -->        
+            <button type="submit" name="delete" value=<?php echo $kumpulan_koreantrip['id']; ?>>Delete</button>
+            <!-- kita buat link khusus ke page update dengan membawa id data yang akan diupdate -->        
+            <a href=<?php echo "update.php?id=".$kumpulan_koreantrip['id']; ?>>Update data</a>       
+        </form>
     </div>
     
 </body>
