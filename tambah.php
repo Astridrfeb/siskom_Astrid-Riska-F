@@ -4,10 +4,12 @@
     // kode ini akan dijalankan ketika user menekan button dengan name submit
     if(isset($_POST["submit"])){
         // membuat variabel yang berisi input dari form
-        $No = $conn->real_escape_string($_POST['No']);
         $Nama_Tempat= $conn->real_escape_string($_POST['Nama_Tempat']);
         $Rating = $conn->real_escape_string($_POST['Rating']);
-        $Detail = $conn->real_escape_string($_POST['Detail']);
+        $Rating = $conn->real_escape_string($_POST['Gambar']);
+        $Alamat = $conn->real_escape_string($_POST['Alamat']);
+        $Tahun_Dibangun = $conn->real_escape_string($_POST['Tahun_Dibangun']);
+        $Penjelasan = $conn->real_escape_string($_POST['Penjelasan']);
         //membuat alamat gambarnya
         $filename = $_FILES['img']["name"];
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
@@ -19,15 +21,14 @@
         // jika ada gambar yang diunggah maka kita akan memasukkan seluruh data
         // jika tidak ada gambar maka kita akan memasukkan seluruh data kecuali kolom image
         if(move_uploaded_file($tempname, $folder)){
-            $sql = "INSERT INTO mahasiswa (No, Nama_Tempat, Rating , Gambar, Detail) VALUES ('$Nama_Tempat', $Rating, '$folder', '$Detail')";        
+            $sql = "INSERT INTO koreantrip ( Nama_Tempat, Rating , Gambar, Alamat, Tahun_Dibangun, Penjelasan ) VALUES ('$Nama_Tempat', $Rating, '$folder', '$Alamat', $Tahun_Dibangun, '$Penjelasan');";        
         } else {
-            $sql = "INSERT INTO mahasiswa (No, Nama_Tempat, Rating , Detail , Gambar) VALUES ('$Nama_Tempat', $Rating, '$folder', '$Detail')";
-        } 
+            $sql = "INSERT INTO koreantrip ( Nama_Tempat, Rating, Alamat, Tahun_Dibangun, Penjelasan ) VALUES ('$Nama_Tempat', $Rating, '$Alamat', $Tahun_Dibangun, '$Penjelasan');";              
         // menjalankan query
         $result = $conn->query($sql);
 
         if($result) {
-            // jika query sukses maka akan diarahkan ke page index.php
+            // jika query sukses maka akan diarahkan ke page rekomendasi.php
             header('Location: rekomendasi.php');
         } else {
             echo "error";
@@ -51,8 +52,8 @@
 <body>
     <nav class = "navbar">
         <ul>
-            <li><a href="index.html" class="menu">Home</a></li>
-            <li><a href="about.html" class="menu">About</a></li>
+            <li><a href="index.php" class="menu">Home</a></li>
+            <li><a href="about.php" class="menu">About</a></li>
             <li><a href="#recommendationtrip"class = "menu">Contact</a></li>
         </ul>
     </nav>
@@ -61,30 +62,32 @@
         <div class="text-data"></div>
         <h1>Tambah</h1>
          <form method="POST" action="tambah.php" enctype="multipart/form-data">
-            <label>No</label>
+         <label>Nama</label>
             <br>
-            <!-- menambahkan attribute value yang nilainya dari database. jadi nanti di input formnya langsung terisi nilai -->
-            <input type="text" name="No" value=<?php echo $student['No']; ?> >
+            <input type="text" name="Nama_Tempat" >
             <br>
-            <label>Nama_Tempat<label>
+            <label>Rating</label>
             <br>
-            <input type="text" name="Nama_Tempat" value=<?php echo $student['Nama_Tempat']; ?> >
+            <input type="text" name="Rating" >
             <br>
-            <label>Rating<label>
+            <label>Alamat<label>
             <br>
-            <input type="text" name="Rating" value=<?php echo $student['Rating']; ?> >
+            <input type="text" name="Alamat" >
+            <br>
+            <label>Tahun Dibangun<label>
+            <br>
+            <input type="text" name="Tahun_Dibangun" >
             <br>
             <label>Gambar</label>
             <br>
-            <input type="file" name="img">
+            <input type="file" name="Gambar">
             <br>
-            <label>Detail<label>
+            <label>Penjelasan</label>
             <br>
-            <input type="text" name="Detail" value=<?php echo $student['Detail']; ?> >
+            <input type="text" name="Penjelasan">
             <br>
-            <br>
-            <button type="submit" name="update" value=<?php echo $student["id"]; ?>>Submit</button>
+            <!-- button type submit ini berfungsi untuk submit form -->
+            <button type="submit" name="submit" value="submit">Submit</button>
         </form>
-            </div>
-
-        </div>
+    </body>
+<html>
